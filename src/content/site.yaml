@@ -30,7 +30,9 @@ social:
   qiita: ""   # Japanese tech blog (optional)
 
 # --- Site Settings ---
-url: "https://yourusername.github.io"
+# For project pages: https://<username>.github.io/<repository>
+# For user pages: https://<username>.github.io
+url: "https://susumutomita.github.io/Tatsuya-K3.github.io"
 
 # --- Stats (shown on home page) ---
 stats:
