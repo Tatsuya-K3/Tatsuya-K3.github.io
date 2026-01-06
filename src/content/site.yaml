@@ -1,0 +1,141 @@
+# ==========================================
+# SITE CONFIGURATION
+# Edit this file to customize your portfolio
+# ==========================================
+
+# --- Basic Profile ---
+name: "Your Name"
+jobTitle: "Your Job Title"
+location: "Your Location"
+tagline: "Your tagline or motto"
+
+# Short introduction (shown on home page)
+introduction: >
+  Write a brief introduction about yourself.
+  This appears on the home page.
+
+# Longer bio (shown on about page)
+bio: >
+  Write a longer biography about yourself.
+  Describe your background, experience, and what drives you.
+
+# --- Social Links ---
+# Leave empty ("") if you don't use that service
+social:
+  github: "https://github.com/yourusername"
+  linkedin: "https://www.linkedin.com/in/yourusername/"
+  x: "https://twitter.com/yourusername"
+  email: "your.email@example.com"
+  zenn: ""    # Japanese tech blog (optional)
+  qiita: ""   # Japanese tech blog (optional)
+
+# --- Site Settings ---
+url: "https://yourusername.github.io"
+
+# --- Stats (shown on home page) ---
+stats:
+  - value: "10+"
+    label: "Years Experience"
+  - value: "50+"
+    label: "Projects"
+  - value: "100+"
+    label: "Contributions"
+  - value: "90%+"
+    label: "Satisfaction"
+
+# --- Skills ---
+# Customize categories and items based on your field
+skills:
+  - category: "Category 1"
+    items: ["Skill 1", "Skill 2", "Skill 3"]
+  - category: "Category 2"
+    items: ["Skill 4", "Skill 5", "Skill 6"]
+  - category: "Category 3"
+    items: ["Skill 7", "Skill 8", "Skill 9"]
+
+# --- Certifications ---
+# Add your certifications (leave empty [] if none)
+certifications:
+  - name: "Certification Name"
+    issuer: "Issuing Organization"
+
+# --- Companies (shown in "Trusted by" section) ---
+companies:
+  - "Company A"
+  - "Company B"
+  - "Company C"
+
+# --- Key Achievements (shown on resume page) ---
+achievements:
+  - "Add your key achievements here"
+  - "Example: Led successful project delivery"
+  - "Example: Built scalable systems"
+  - "Example: Mentored team members"
+
+# --- What I Do (shown on about page) ---
+# Describe your main activities or services
+whatIDo:
+  - title: "Activity 1"
+    description: "Describe what you do in this area."
+    icon: "code"          # Options: code, cloud, team, learning
+    color: "accent"       # Options: accent, cyan, green, magenta
+  - title: "Activity 2"
+    description: "Describe what you do in this area."
+    icon: "cloud"
+    color: "cyan"
+  - title: "Activity 3"
+    description: "Describe what you do in this area."
+    icon: "team"
+    color: "green"
+  - title: "Activity 4"
+    description: "Describe what you do in this area."
+    icon: "learning"
+    color: "magenta"
+
+# --- Cover Letter Content ---
+coverLetter:
+  greeting: "Dear Hiring Manager,"
+  paragraphs:
+    - >
+      I am writing to express my interest in the position at your organization.
+      With my experience and passion for excellence, I believe I would be a valuable addition to your team.
+    - "My key strengths include:"
+  bulletPoints:
+    - title: "Strength 1"
+      description: "Description of your first key strength or expertise."
+    - title: "Strength 2"
+      description: "Description of your second key strength or expertise."
+    - title: "Strength 3"
+      description: "Description of your third key strength or expertise."
+  closingParagraphs:
+    - >
+      What sets me apart is my commitment to delivering high-quality work while maintaining
+      a collaborative and positive attitude.
+    - >
+      I would welcome the opportunity to discuss how my experience and skills could contribute
+      to your team's success.
+    - "Thank you for considering my application. I look forward to the possibility of speaking with you."
+  closing: "Best regards,"
+
+# --- Services (shown on contact page) ---
+# Describe the services or help you can offer
+services:
+  - title: "Service 1"
+    description: "Description of your first service offering."
+  - title: "Service 2"
+    description: "Description of your second service offering."
+  - title: "Service 3"
+    description: "Description of your third service offering."
+  - title: "Service 4"
+    description: "Description of your fourth service offering."
+
+# --- Page Descriptions (used for SEO and page headers) ---
+pageDescriptions:
+  blog:
+    title: "Blog"
+    description: "My thoughts and writings."
+    tagline: "Sharing ideas, experiences, and insights."
+  papers:
+    title: "Papers"
+    description: "Research papers and writings."
+    tagline: "Academic and research publications."

@@ -1,0 +1,127 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getProfile, getCoverLetter, LINKS } from "../lib/constants";
+
+const profile = getProfile();
+const coverLetter = getCoverLetter();
+
+const currentDate = new Date().toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<BaseLayout
+  title={`Cover Letter - ${profile.name}`}
+  description={`Cover letter of ${profile.name} - ${profile.jobTitle}`}
+>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 print:py-8 print:px-0">
+    <!-- Print Button -->
+    <div class="mb-8 flex justify-end gap-3 print:hidden">
+      <button
+        id="printBtn"
+        class="inline-flex items-center gap-2 px-4 py-2 bg-accent-500 hover:bg-accent-600 text-white rounded-lg transition-colors"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        Download PDF
+      </button>
+      <a
+        href="/resume"
+        class="inline-flex items-center gap-2 px-4 py-2 border border-light-border dark:border-dark-border hover:border-accent-500 rounded-lg transition-colors"
+      >
+        View Resume
+      </a>
+    </div>
+
+    <!-- Letter Content -->
+    <div class="bg-white dark:bg-dark-surface print:bg-white p-8 md:p-12 rounded-lg border border-light-border dark:border-dark-border print:border-0 print:p-0">
+      <!-- Header -->
+      <div class="mb-8 print:mb-6">
+        <h1 class="font-display text-2xl md:text-3xl font-bold mb-2 print:text-black">{profile.name}</h1>
+        <p class="text-light-muted dark:text-dark-muted print:text-gray-600">
+          {profile.jobTitle}
+        </p>
+        <div class="flex flex-wrap gap-4 mt-3 text-sm text-light-muted dark:text-dark-muted print:text-gray-600">
+          <span>{profile.location}</span>
+          {LINKS.email && (
+            <>
+              <span>•</span>
+              <a href={`mailto:${LINKS.email}`} class="hover:text-accent-500">{LINKS.email}</a>
+            </>
+          )}
+          {LINKS.linkedin && (
+            <>
+              <span>•</span>
+              <a href={LINKS.linkedin} class="hover:text-accent-500">LinkedIn</a>
+            </>
+          )}
+          {LINKS.github && (
+            <>
+              <span>•</span>
+              <a href={LINKS.github} class="hover:text-accent-500">GitHub</a>
+            </>
+          )}
+        </div>
+      </div>
+
+      <!-- Date -->
+      <p class="mb-8 text-light-muted dark:text-dark-muted print:text-gray-600 print:mb-6">
+        {currentDate}
+      </p>
+
+      <!-- Greeting -->
+      <p class="mb-6 print:text-black">{coverLetter.greeting}</p>
+
+      <!-- Body -->
+      <div class="space-y-4 text-light-text dark:text-dark-text print:text-black leading-relaxed">
+        {coverLetter.paragraphs.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+
+        <ul class="list-disc pl-6 space-y-2">
+          {coverLetter.bulletPoints.map((point) => (
+            <li>
+              <strong>{point.title}:</strong> {point.description}
+            </li>
+          ))}
+        </ul>
+
+        {coverLetter.closingParagraphs.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
+
+      <!-- Closing -->
+      <div class="mt-8 print:mt-6">
+        <p class="mb-4 print:text-black">{coverLetter.closing}</p>
+        <p class="font-display font-semibold text-lg print:text-black">{profile.name}</p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  @media print {
+    :global(body) {
+      background: white !important;
+      color: black !important;
+    }
+    :global(header),
+    :global(footer),
+    :global(.print\\:hidden) {
+      display: none !important;
+    }
+    :global(.dark) {
+      color-scheme: light;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById("printBtn")?.addEventListener("click", () => {
+    window.print();
+  });
+</script>
