@@ -3,6 +3,13 @@ import { NAV_LINKS, SITE } from "../../lib/constants";
 import ThemeToggle from "./ThemeToggle";
 
 const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
+
+// Helper to prepend base path to links
+const withBase = (href: string) => {
+  if (href === "/") return base || "/";
+  return `${base}${href}`;
+};
 ---
 
 <header
@@ -12,7 +19,7 @@ const currentPath = Astro.url.pathname;
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
       <a
-        href="/"
+        href={withBase("/")}
         class="font-display font-bold text-lg hover:text-accent-500 transition-colors"
       >
         {SITE.name}
@@ -22,12 +29,13 @@ const currentPath = Astro.url.pathname;
       <div class="hidden md:flex items-center gap-1">
         {
           NAV_LINKS.map((link) => {
+            const fullHref = withBase(link.href);
             const isActive =
-              currentPath === link.href ||
-              (link.href !== "/" && currentPath.startsWith(link.href));
+              currentPath === fullHref ||
+              (link.href !== "/" && currentPath.startsWith(fullHref));
             return (
               <a
-                href={link.href}
+                href={fullHref}
                 class:list={[
                   "px-3 py-2 text-sm font-medium rounded-md transition-colors",
                   isActive
@@ -88,12 +96,13 @@ const currentPath = Astro.url.pathname;
       <div class="flex flex-col gap-1">
         {
           NAV_LINKS.map((link) => {
+            const fullHref = withBase(link.href);
             const isActive =
-              currentPath === link.href ||
-              (link.href !== "/" && currentPath.startsWith(link.href));
+              currentPath === fullHref ||
+              (link.href !== "/" && currentPath.startsWith(fullHref));
             return (
               <a
-                href={link.href}
+                href={fullHref}
                 class:list={[
                   "px-3 py-2 text-sm font-medium rounded-md transition-colors",
                   isActive

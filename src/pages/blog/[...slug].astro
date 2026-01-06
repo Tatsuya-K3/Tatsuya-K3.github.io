@@ -3,6 +3,10 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getProfile } from "../../lib/constants";
 
+// Base URL helper for GitHub Pages
+const base = import.meta.env.BASE_URL;
+const withBase = (href: string) => href === "/" ? (base || "/") : `${base}${href}`;
+
 export async function getStaticPaths() {
   return (await getCollection("blog")).map(({ slug }) => ({
     params: { slug },
@@ -46,7 +50,7 @@ const formatDate = (date: Date) => {
     <!-- Header -->
     <header class="mb-12">
       <a
-        href="/blog"
+        href={withBase("/blog")}
         class="inline-flex items-center gap-1 text-sm text-light-muted dark:text-dark-muted hover:text-accent-500 transition-colors mb-6"
       >
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

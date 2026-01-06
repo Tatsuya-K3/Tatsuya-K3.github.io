@@ -3,6 +3,10 @@ import { SITE, LINKS, getProfile } from "../lib/constants";
 import Header from "../components/global/Header.astro";
 import Footer from "../components/global/Footer.astro";
 
+// Base URL helper for GitHub Pages
+const base = import.meta.env.BASE_URL;
+const withBase = (href: string) => href === "/" ? (base || "/") : `${base}${href}`;
+
 interface Props {
   title?: string;
   description?: string;
@@ -47,7 +51,7 @@ const schema = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href={withBase("/favicon.ico")} />
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
 

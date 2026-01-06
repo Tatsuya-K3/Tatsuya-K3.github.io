@@ -3,6 +3,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { getProfile, getSkills, getCertifications, getAchievements, LINKS } from "../lib/constants";
 
+// Base URL helper for GitHub Pages
+const base = import.meta.env.BASE_URL;
+const withBase = (href: string) => href === "/" ? (base || "/") : `${base}${href}`;
+
 const profile = getProfile();
 const skillsFromYaml = getSkills();
 const certificationsFromYaml = getCertifications();
@@ -43,7 +47,7 @@ const skills = Object.fromEntries(
         Download PDF
       </button>
       <a
-        href="/cover-letter"
+        href={withBase("/cover-letter")}
         class="inline-flex items-center gap-2 px-4 py-2 border border-light-border dark:border-dark-border hover:border-accent-500 rounded-lg transition-colors"
       >
         View Cover Letter

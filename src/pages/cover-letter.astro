@@ -2,6 +2,10 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getProfile, getCoverLetter, LINKS } from "../lib/constants";
 
+// Base URL helper for GitHub Pages
+const base = import.meta.env.BASE_URL;
+const withBase = (href: string) => href === "/" ? (base || "/") : `${base}${href}`;
+
 const profile = getProfile();
 const coverLetter = getCoverLetter();
 
@@ -29,7 +33,7 @@ const currentDate = new Date().toLocaleDateString("en-US", {
         Download PDF
       </button>
       <a
-        href="/resume"
+        href={withBase("/resume")}
         class="inline-flex items-center gap-2 px-4 py-2 border border-light-border dark:border-dark-border hover:border-accent-500 rounded-lg transition-colors"
       >
         View Resume

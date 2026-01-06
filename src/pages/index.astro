@@ -3,6 +3,10 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { LINKS, getProfile, getStats, getCompanies } from "../lib/constants";
 
+// Base URL helper for GitHub Pages
+const base = import.meta.env.BASE_URL;
+const withBase = (href: string) => href === "/" ? (base || "/") : `${base}${href}`;
+
 // Get profile data from YAML config
 const profile = getProfile();
 const stats = getStats();
@@ -48,7 +52,7 @@ const formatDate = (date: Date) => {
       </p>
       <div class="flex flex-wrap gap-4 pt-4">
         <a
-          href="/projects"
+          href={withBase("/projects")}
           class="inline-flex items-center px-6 py-3 bg-accent-500 hover:bg-accent-600 text-white font-medium rounded-lg transition-colors"
         >
           View Projects
@@ -57,7 +61,7 @@ const formatDate = (date: Date) => {
           </svg>
         </a>
         <a
-          href="/resume"
+          href={withBase("/resume")}
           class="inline-flex items-center px-6 py-3 border border-light-border dark:border-dark-border hover:border-accent-500 dark:hover:border-accent-500 font-medium rounded-lg transition-colors"
         >
           Download Resume
@@ -140,7 +144,7 @@ const formatDate = (date: Date) => {
       <div class="flex items-center justify-between mb-8">
         <h2 class="font-display text-2xl md:text-3xl font-bold">Featured Work</h2>
         <a
-          href="/projects"
+          href={withBase("/projects")}
           class="text-sm font-medium text-accent-500 hover:text-accent-600 transition-colors"
         >
           View all projects →
@@ -199,7 +203,7 @@ const formatDate = (date: Date) => {
       <div class="flex items-center justify-between mb-8">
         <h2 class="font-display text-2xl md:text-3xl font-bold">Recent Posts</h2>
         <a
-          href="/blog"
+          href={withBase("/blog")}
           class="text-sm font-medium text-accent-500 hover:text-accent-600 transition-colors"
         >
           View all →
@@ -233,7 +237,7 @@ const formatDate = (date: Date) => {
     <h2 class="font-display text-2xl md:text-3xl font-bold mb-8 text-center">Explore More</h2>
     <div class="grid gap-6 md:grid-cols-3">
       <a
-        href="/papers"
+        href={withBase("/papers")}
         class="group p-6 rounded-lg border border-light-border dark:border-dark-border hover:border-accent-500 dark:hover:border-accent-500 transition-colors text-center"
       >
         <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-accent-500/10 flex items-center justify-center">
@@ -247,7 +251,7 @@ const formatDate = (date: Date) => {
         </p>
       </a>
       <a
-        href="/about"
+        href={withBase("/about")}
         class="group p-6 rounded-lg border border-light-border dark:border-dark-border hover:border-accent-500 dark:hover:border-accent-500 transition-colors text-center"
       >
         <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-accent-500/10 flex items-center justify-center">
@@ -261,7 +265,7 @@ const formatDate = (date: Date) => {
         </p>
       </a>
       <a
-        href="/contact"
+        href={withBase("/contact")}
         class="group p-6 rounded-lg border border-light-border dark:border-dark-border hover:border-accent-500 dark:hover:border-accent-500 transition-colors text-center"
       >
         <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-accent-500/10 flex items-center justify-center">
@@ -296,7 +300,7 @@ const formatDate = (date: Date) => {
           Get in Touch
         </a>
         <a
-          href="/cover-letter"
+          href={withBase("/cover-letter")}
           class="inline-flex items-center px-6 py-3 border border-light-border dark:border-dark-border hover:border-accent-500 dark:hover:border-accent-500 font-medium rounded-lg transition-colors"
         >
           View Cover Letter
