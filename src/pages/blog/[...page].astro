@@ -1,0 +1,105 @@
+---
+import type { GetStaticPaths, Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Pagination from "../../components/Pagination.astro";
+import { POSTS_PER_PAGE, getProfile, getPageDescriptions } from "../../lib/constants";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = (await getCollection("blog"))?.sort(
+    (blogEntryA, blogEntryB) =>
+      (blogEntryB.data.pubDate || new Date()).getTime() -
+      (blogEntryA.data.pubDate || new Date()).getTime(),
+  );
+
+  return paginate(posts, { pageSize: POSTS_PER_PAGE });
+}) satisfies GetStaticPaths;
+
+type Props = {
+  page: Page<CollectionEntry<"blog">>;
+};
+
+const { page } = Astro.props;
+const profile = getProfile();
+const pageDesc = getPageDescriptions().blog;
+
+const formatDate = (date: Date) => {
+  return new Intl.DateTimeFormat("ja-JP", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  }).format(date);
+};
+
+// SEO: Add page number to title and description for pages > 1
+const pageTitle =
+  page.currentPage === 1
+    ? `${pageDesc.title} - ${profile.name}`
+    : `${pageDesc.title} - Page ${page.currentPage} - ${profile.name}`;
+
+const pageDescription =
+  page.currentPage === 1
+    ? pageDesc.description
+    : `${pageDesc.description} Page ${page.currentPage} of ${page.lastPage}.`;
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+    <!-- Header -->
+    <div class="mb-12">
+      <h1 class="font-display text-4xl md:text-5xl font-bold mb-6">{pageDesc.title}</h1>
+      <p class="text-lg text-light-muted dark:text-dark-muted max-w-3xl">
+        {pageDesc.tagline}
+      </p>
+    </div>
+
+    <!-- Posts List -->
+    <div class="space-y-6">
+      {
+        page.data.map((post) => (
+          <a
+            href={`/blog/${post.slug}`}
+            class="block p-6 rounded-lg border border-light-border dark:border-dark-border hover:border-accent-500 dark:hover:border-accent-500 transition-colors group"
+          >
+            <div class="flex flex-wrap items-center gap-3 mb-2">
+              <time class="text-sm text-light-muted dark:text-dark-muted">
+                {formatDate(post.data.pubDate || new Date())}
+              </time>
+              {post.data.categories && post.data.categories.length > 0 && (
+                <span class="px-2 py-0.5 text-xs font-medium bg-accent-500/10 text-accent-500 rounded">
+                  {post.data.categories[0]}
+                </span>
+              )}
+            </div>
+            <h2 class="font-display font-semibold text-xl group-hover:text-accent-500 transition-colors mb-2">
+              {post.data.title || "No title"}
+            </h2>
+            {post.data.description && (
+              <p class="text-light-muted dark:text-dark-muted line-clamp-2">
+                {post.data.description}
+              </p>
+            )}
+          </a>
+        ))
+      }
+    </div>
+
+    <!-- Pagination -->
+    <Pagination
+      currentPage={page.currentPage}
+      totalPages={page.lastPage}
+      prevUrl={page.url.prev}
+      nextUrl={page.url.next}
+    />
+  </div>
+</BaseLayout>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
