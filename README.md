@@ -300,15 +300,52 @@ pubDate: 2024-01-01
 
 このテンプレートはGitHub Pagesへの自動デプロイに対応しています。
 
+#### 1. 設定ファイルの更新（重要）
+
+デプロイ前に、以下の2つのファイルを自分の環境に合わせて更新してください。
+
+##### パターンA: ユーザーページ（`username.github.io`）の場合
+
+リポジトリ名が `username.github.io` の形式の場合：
+
+**`astro.config.mjs`** を編集：
+```javascript
+const basePath = ''; // 空にする
+const siteUrl = 'https://yourusername.github.io';
+```
+
+**`src/content/site.yaml`** を編集：
+```yaml
+url: "https://yourusername.github.io"
+```
+
+##### パターンB: プロジェクトページ（`username.github.io/repo-name`）の場合
+
+通常のリポジトリ名の場合：
+
+**`astro.config.mjs`** を編集：
+```javascript
+const basePath = '/your-repo-name'; // リポジトリ名を設定
+const siteUrl = `https://yourusername.github.io${basePath}`;
+```
+
+**`src/content/site.yaml`** を編集：
+```yaml
+url: "https://yourusername.github.io/your-repo-name"
+```
+
+#### 2. デプロイ手順
+
 1. GitHubにリポジトリを作成
-2. コードをプッシュ
-3. リポジトリの Settings → Pages を開く
-4. Source を「GitHub Actions」に設定
-5. mainブランチにプッシュすると自動でデプロイされます
+2. 上記の設定ファイルを更新してコミット
+3. コードをプッシュ
+4. リポジトリの Settings → Pages を開く
+5. Source を「GitHub Actions」に設定
+6. mainブランチにプッシュすると自動でデプロイされます
 
-デプロイ後のURL: `https://yourusername.github.io/repository-name`
-
-**注意**: リポジトリ名がユーザー名と同じ場合（`username.github.io`）は、`astro.config.mjs` の `base` 設定は不要です。それ以外の場合は、`base: '/repository-name'` を設定してください。
+デプロイ後のURL:
+- ユーザーページ: `https://yourusername.github.io`
+- プロジェクトページ: `https://yourusername.github.io/repository-name`
 
 ### Vercelでのデプロイ
 

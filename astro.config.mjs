@@ -9,10 +9,18 @@ import { remarkReadingTime } from "./src/lib/ remark-reading-time.mjs";
 
 import svelte from "@astrojs/svelte";
 
-// https://astro.build/config
-// TODO: Update 'site' with your own GitHub Pages URL
-// For user pages: https://<username>.github.io
-// For project pages: https://<username>.github.io/<repository>
+// ============================================
+// GitHub Pages 設定 - デプロイ前に変更してください
+// ============================================
+//
+// パターンA: ユーザーページ (username.github.io) の場合
+//   const basePath = '';
+//   const siteUrl = 'https://yourusername.github.io';
+//
+// パターンB: プロジェクトページ (username.github.io/repo-name) の場合
+//   const basePath = '/your-repo-name';
+//   const siteUrl = `https://yourusername.github.io${basePath}`;
+//
 const basePath = '/Tatsuya-K3.github.io';
 const siteUrl = `https://susumutomita.github.io${basePath}`;
 
