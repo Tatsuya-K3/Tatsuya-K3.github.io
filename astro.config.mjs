@@ -21,8 +21,8 @@ import svelte from "@astrojs/svelte";
 //   const basePath = '/your-repo-name';
 //   const siteUrl = `https://yourusername.github.io${basePath}`;
 //
-const basePath = '/Tatsuya-K3.github.io';
-const siteUrl = `https://susumutomita.github.io${basePath}`;
+const basePath = '';
+const siteUrl = `https://Tatsuya-K3.github.io`;
 
 export default defineConfig({
 	site: siteUrl,
